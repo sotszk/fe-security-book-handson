@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サインアップ</title>
+  <style>
+    body {
+      display: grid;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      place-items: center;
+      background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    #signup {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    fieldset {
+      padding: 32px;
+      background-color: #fff;
+    }
+
+    .form-caption {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background-color: #222;
+      color: #ddd;
+      padding: 4px 8px;
+    }
+
+    fieldset>div {
+      margin-bottom: 32px;
+    }
+
+    .form-caption {
+      text-align: center;
+    }
+
+    :where(input[type="text"], input[type="email"], input[type="password"]) {
+      display: block;
+      width: 100%;
+      padding: 8px 8px;
+    }
+
+    :where(input[type="password"], input[type="email"]):invalid {
+      border: 1px solid red;
+    }
+
+    :where(input[type="password"], input[type="email"]):valid {
+      border: 1px solid green;
+    }
+
+    #submit {
+      width: 100%;
+      padding: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="signup" action="/signup" method="POST">
+    <fieldset>
+      <legend class="form-caption">アカウント作成</legend>
+      <div>
+        <label for="username">メールアドレス</label>
+        <input id="username" type="email" name="username" class="signup-input" required />
+      </div>
+      <div>
+        <label for="password">パスワード</label>
+        <input id="password" type="password" name="password" class="signup-input" required
+          pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="パスワードには8文字以上の英数字を入力してください" />
+      </div>
+      <p><small>パスワードには8文字以上の英数字を入力してください</small></p>
+      <button id="submit" type="submit">アカウント作成</button>
+    </fieldset>
+  </form>
+
+  <script>
+    const form = document.querySelector('#signup');
+    const button = document.querySelector('#submit');
+    const password = document.querySelector('#password');
+
+    button.addEventListener('click', () => {
+      if (!/^[A-Za-z\d]{8,}$/.test(password.value)) {
+        password.setCustomValidity('8文字以上の英数字を入力してください');
+      } else if (!/(?=.*[A-Za-z])(?=.*\d)/.test(password.value)) {
+        password.setCustomValidity('英数字を少なくとも一文字以上入力してください');
+      } else {
+        password.setCustomValidity('');
+      }
+    })
+  </script>
+</body>
+
+</html>
