@@ -74,12 +74,17 @@
       <legend class="form-caption">アカウント作成</legend>
       <div>
         <label for="username">メールアドレス</label>
-        <input id="username" type="email" name="username" class="signup-input" required />
+        <!-- inputmode 属性でモバイルユーザー向けに最適なキーボードを表示する -->
+        <input id="username" type="email" name="username" class="signup-input" required autocomplete="username"
+          inputmode="email" />
       </div>
       <div>
         <label for="password">パスワード</label>
+        <!-- pattern 属性は正規表現でバリデートをかける -->
+        <!-- autocomplete 属性はパスワードマネージャをサポート -->
         <input id="password" type="password" name="password" class="signup-input" required
-          pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="パスワードには8文字以上の英数字を入力してください" />
+          pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="パスワードには8文字以上の英数字を入力してください" autocomplete="new-password"
+          inputmode="latin" />
       </div>
       <p><small>パスワードには8文字以上の英数字を入力してください</small></p>
       <button id="submit" type="submit">アカウント作成</button>
